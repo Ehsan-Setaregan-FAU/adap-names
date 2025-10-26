@@ -16,7 +16,9 @@ export class Name {
     private delimiter: string = DEFAULT_DELIMITER;
     private components: string[] = [];
 
-    /** Expects that all Name components are properly masked */
+    /** * @methodtype initialization-method 
+     * Expects that all Name components are properly masked 
+     */
     constructor(other: string[], delimiter?: string) {
         this.components = other;
         if (delimiter !== undefined) {
@@ -25,6 +27,7 @@ export class Name {
     }
 
     /**
+     * @methodtype conversion-method
      * Returns a human-readable representation of the Name instance using user-set control characters
      * Control characters are not escaped (creating a human-readable string)
      * Users can vary the delimiter character to be used
@@ -33,7 +36,8 @@ export class Name {
         return this.components.join(delimiter);
     }
 
-    /** * Returns a machine-readable representation of Name instance using default control characters
+    /** * @methodtype conversion-method
+     * Returns a machine-readable representation of Name instance using default control characters
      * Machine-readable means that from a data string, a Name can be parsed back in
      * The control characters in the data string are the default characters
      */
@@ -42,30 +46,40 @@ export class Name {
         return this.components.join(DEFAULT_DELIMITER);
     }
 
+    /** @methodtype get-method */
     public getComponent(i: number): string {
         return this.components[i];
     }
 
-    /** Expects that new Name component c is properly masked */
+    /** * @methodtype set-method
+     * Expects that new Name component c is properly masked 
+     */
     public setComponent(i: number, c: string): void {
         this.components[i] = c;
     }
 
-     /** Returns number of components in Name instance */
+     /** * @methodtype get-method
+      * Returns number of components in Name instance 
+      */
      public getNoComponents(): number {
         return this.components.length;
     }
 
-    /** Expects that new Name component c is properly masked */
+    /** * @methodtype command-method
+     * Expects that new Name component c is properly masked 
+     */
     public insert(i: number, c: string): void {
         this.components.splice(i, 0, c);
     }
 
-    /** Expects that new Name component c is properly masked */
+    /** * @methodtype command-method
+     * Expects that new Name component c is properly masked 
+     */
     public append(c: string): void {
         this.components.push(c);
     }
 
+    /** @methodtype command-method */
     public remove(i: number): void {
         this.components.splice(i, 1);
     }
