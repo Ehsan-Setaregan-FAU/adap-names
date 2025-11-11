@@ -38,8 +38,10 @@ export class Name {
 
     /** * @methodtype conversion-method
      * Returns a machine-readable representation of Name instance using default control characters
+    /** 
+     * Returns a machine-readable representation of Name instance using default special characters
      * Machine-readable means that from a data string, a Name can be parsed back in
-     * The control characters in the data string are the default characters
+     * The special characters in the data string are the default characters
      */
     public asDataString(): string {
         // "using default control characters"
@@ -47,6 +49,7 @@ export class Name {
     }
 
     /** @methodtype get-method */
+    /** Returns properly masked component string */
     public getComponent(i: number): string {
         return this.components[i];
     }
