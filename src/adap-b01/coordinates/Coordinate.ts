@@ -54,7 +54,6 @@ export class Coordinate {
     /** @methodtype comparison-method */
     public compareDistance(other: Coordinate): number {
         let thisR = Math.hypot(this.getX(), this.getY());
-        // 🐞 باگ جزوه در اینجا تصحیح شد
         let otherR = Math.hypot(other.getX(), other.getY());
         if (thisR == otherR) {
             return 0;
