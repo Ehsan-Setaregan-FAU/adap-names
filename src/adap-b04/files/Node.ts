@@ -1,5 +1,6 @@
 import { Name } from "../names/Name";
 import { Directory } from "./Directory";
+import { IllegalArgumentException } from "../common/IllegalArgumentException";
 
 export class Node {
 
@@ -18,6 +19,9 @@ export class Node {
     }
 
     public move(to: Directory): void {
+        // Precondition: target directory must not be null
+        IllegalArgumentException.assert(to !== null && to !== undefined, "Target directory cannot be null");
+
         this.parentNode.removeChildNode(this);
         to.addChildNode(this);
         this.parentNode = to;
@@ -38,6 +42,8 @@ export class Node {
     }
 
     public rename(bn: string): void {
+        // Precondition: new name must be valid
+        IllegalArgumentException.assert(bn !== null && bn !== "" && bn !== undefined, "Base name cannot be null or empty");
         this.doSetBaseName(bn);
     }
 
