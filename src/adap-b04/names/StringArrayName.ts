@@ -11,31 +11,18 @@ export class StringArrayName extends AbstractName {
         this.components = source;
     }
 
-    // --- IMPLEMENTATION OF ABSTRACT PRIMITIVES (Inheritance Interface) ---
+    // --- IMPLEMENTATION OF ABSTRACT PRIMITIVES ---
 
-    /**
-     * Primitive: Provides the list of components (Read access to state).
-     * This is required by AbstractName.
-     */
     protected getComponentList(): string[] {
         return this.components;
     }
 
-    /**
-     * Primitive: Updates the list of components (Write access to state).
-     * This is required by AbstractName.
-     */
     protected setComponentList(components: string[]): void {
         this.components = components;
     }
 
     // --- CLONEABLE IMPLEMENTATION ---
-    // This public method is implemented here because it must return the specific type StringArrayName (subclass).
     public clone(): Name {
-        // Returns a deep copy of the current instance
         return new StringArrayName([...this.components], this.delimiter);
     }
-    
-    // All other methods (asString, append, remove, etc.) are inherited from AbstractName.
-    // The previous throw new Error methods are now deleted as they are redundant.
 }
