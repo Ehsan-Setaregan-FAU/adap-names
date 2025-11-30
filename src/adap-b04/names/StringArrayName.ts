@@ -1,69 +1,41 @@
-import { DEFAULT_DELIMITER, ESCAPE_CHARACTER } from "../common/Printable";
-import { Name } from "./Name";
 import { AbstractName } from "./AbstractName";
+import { Name } from "./Name";
 
 export class StringArrayName extends AbstractName {
 
     protected components: string[] = [];
 
     constructor(source: string[], delimiter?: string) {
-        super();
-        throw new Error("needs implementation or deletion");
+        // Calls the AbstractName constructor, which sets the delimiter and checks the Class Invariant.
+        super(delimiter); 
+        this.components = source;
     }
 
+    // --- IMPLEMENTATION OF ABSTRACT PRIMITIVES (Inheritance Interface) ---
+
+    /**
+     * Primitive: Provides the list of components (Read access to state).
+     * This is required by AbstractName.
+     */
+    protected getComponentList(): string[] {
+        return this.components;
+    }
+
+    /**
+     * Primitive: Updates the list of components (Write access to state).
+     * This is required by AbstractName.
+     */
+    protected setComponentList(components: string[]): void {
+        this.components = components;
+    }
+
+    // --- CLONEABLE IMPLEMENTATION ---
+    // This public method is implemented here because it must return the specific type StringArrayName (subclass).
     public clone(): Name {
-        throw new Error("needs implementation or deletion");
+        // Returns a deep copy of the current instance
+        return new StringArrayName([...this.components], this.delimiter);
     }
-
-    public asString(delimiter: string = this.delimiter): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public asDataString(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEqual(other: Name): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getHashCode(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public isEmpty(): boolean {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getDelimiterCharacter(): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getNoComponents(): number {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public getComponent(i: number): string {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public setComponent(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public insert(i: number, c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public append(c: string) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public remove(i: number) {
-        throw new Error("needs implementation or deletion");
-    }
-
-    public concat(other: Name): void {
-        throw new Error("needs implementation or deletion");
-    }
+    
+    // All other methods (asString, append, remove, etc.) are inherited from AbstractName.
+    // The previous throw new Error methods are now deleted as they are redundant.
 }
