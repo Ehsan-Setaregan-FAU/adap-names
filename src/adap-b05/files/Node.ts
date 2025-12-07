@@ -1,6 +1,5 @@
 import { IllegalArgumentException } from "../common/IllegalArgumentException";
 import { InvalidStateException } from "../common/InvalidStateException";
-
 import { Name } from "../names/Name";
 import { Directory } from "./Directory";
 
@@ -11,7 +10,7 @@ export class Node {
 
     constructor(bn: string, pn: Directory) {
         this.doSetBaseName(bn);
-        this.parentNode = pn; // why oh why do I have to set this
+        this.parentNode = pn;
         this.initialize(pn);
     }
 
@@ -57,7 +56,16 @@ export class Node {
      * @param bn basename of node being searched for
      */
     public findNodes(bn: string): Set<Node> {
-        throw new Error("needs implementation or deletion");
-    }
+        // Validation: Check for invalid state (BuggyFile causes this)
+        const currentName = this.getBaseName();
+        if (currentName === "") {
+             throw new InvalidStateException("Node name cannot be empty (integrity violation)");
+        }
 
+        // Base implementation for leaf nodes
+        if (currentName === bn) {
+            return new Set<Node>([this]);
+        }
+        return new Set<Node>();
+    }
 }
