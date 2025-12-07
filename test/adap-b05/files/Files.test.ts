@@ -66,19 +66,11 @@ describe("Buggy setup test", () => {
       fs.findNodes("ls");
     } catch(er) {
       threwException = true;
-      
-      // UNCOMMENTED LINES BELOW:
-      let ex: Exception = er as Exception;
-      
-      // Check if it is the correct wrapper exception
-      expect(ex).toBeInstanceOf(ServiceFailureException); 
-      
-      // Check if it has the original cause
-      expect(ex.hasTrigger()).toBe(true);
-      
-      let tx: Exception = ex.getTrigger();
-      // Check if the cause was the InvalidState we threw in Node.ts
-      expect(tx).toBeInstanceOf(InvalidStateException);
+       let ex: Exception = er as Exception;
+       expect(ex).toBeInstanceOf(ServiceFailureException);
+       expect(ex.hasTrigger()).toBe(true);
+       let tx: Exception = ex.getTrigger();
+       expect(tx).toBeInstanceOf(InvalidStateException);
     }
     expect(threwException).toBe(true);
   });
