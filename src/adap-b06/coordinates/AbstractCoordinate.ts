@@ -1,5 +1,4 @@
 import { IllegalArgumentException } from "../common/IllegalArgumentException";
-
 import { Coordinate } from "./Coordinate";
 
 export abstract class AbstractCoordinate implements Coordinate {
@@ -27,7 +26,12 @@ export abstract class AbstractCoordinate implements Coordinate {
 
     public getHashCode(): number {
         let hashCode: number = 0;
-        const s: string = this.asDataString();
+        // Fix for Equality Contract:
+        // Hash calculation must be consistent with isEqual().
+        // Since isEqual compares X and Y, hashCode must also be derived from X and Y,
+        // regardless of whether the implementation is Polar or Cartesian.
+        const s: string = this.doGetX() + "#" + this.doGetY();
+        
         for (let i: number = 0; i < s.length; i++) {
             let c: number = s.charCodeAt(i);
             hashCode = (hashCode << 5) - hashCode + c;
@@ -116,5 +120,4 @@ export abstract class AbstractCoordinate implements Coordinate {
     protected isValidDelChar(d: string): boolean {
         return d.length == 1;
     }
-
 }
